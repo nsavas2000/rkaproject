@@ -1,0 +1,75 @@
+# Pinoo Studio
+import Stepper
+from machine import Pin
+from time import sleep
+from machine import PWM
+import time
+        
+class PinooJR:
+    def __init__(self):
+        self.step_count = 510
+
+        Rigth1 = Pin(11, Pin.OUT)
+        Rigth2 = Pin(12, Pin.OUT)
+        Rigth3 = Pin(13, Pin.OUT)
+        Rigth4 = Pin(14, Pin.OUT)
+
+        Left1 = Pin(18, Pin.OUT)
+        Left2 = Pin(17, Pin.OUT)
+        Left3 = Pin(16, Pin.OUT)
+        Left4 = Pin(15, Pin.OUT)
+
+        self.s1 = Stepper.create(Rigth1, Rigth2, Rigth3, Rigth4, delay=1)
+        self.s2 = Stepper.create(Left1, Left2, Left3, Left4, delay=1)
+
+    # Adjust the step count and sleep time according to your needs
+
+    def MoveForward(self, step):
+        for _ in range(step):
+            self.MoveForwardOne()
+
+    def MoveBackward(self, step):
+        for _ in range(step):
+            self.MoveBackwardOne()
+            
+    def MoveTurnLeft(self, step):
+        for _ in range(step):
+            self.MoveTurnLeftOne()
+            
+    def MoveTurnRigth(self, step):
+        for _ in range(step):
+            self.MoveTurnRigthOne()
+            
+    #--------------------------
+            
+    def MoveForwardOne(self):
+        for _ in range(self.step_count):
+            self.s1.step(1, 1)
+            self.s2.step(1, 1)
+            time.sleep_ms(1)
+
+    def MoveBackwardOne(self):
+        for _ in range(self.step_count):
+            self.s1.step(1, -1)
+            self.s2.step(1, -1)
+            time.sleep_ms(1)
+            
+    def MoveTurnLeftOne(self):
+        for _ in range(self.step_count):
+            self.s1.step(1, -1)
+            self.s2.step(1, 1)
+            time.sleep_ms(1)
+            
+    def MoveTurnRigthOne(self):
+        for _ in range(self.step_count):
+            self.s1.step(1, 1)
+            self.s2.step(1, -1)
+            time.sleep_ms(1)
+            
+    def PlayBuzzer(self, freq):
+        buzzer = PWM(Pin(19))
+        buzzer.freq(freq)
+        buzzer.duty_u16(500)
+        sleep(1)
+        buzzer.duty_u16(0)
+

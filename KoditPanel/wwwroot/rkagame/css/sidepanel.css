@@ -1,0 +1,115 @@
+/* =========================================================
+   1. GENEL YAPI VE YÜKSEKLİK TANIMLARI
+   ========================================================= */
+
+/* Ana Row'un Yüksekliği */
+.row {
+  height: 100%;
+}
+
+#leftSide,
+#rightSide {
+  height: calc(100vh - 110px); /* 100px yerine 110px: Dikey taşmayı önlemeye yardımcı olur */
+  padding: 10px;
+}
+/* =========================================================
+   2. SOL TARAF (BLOCKLY) - Blok Editörü
+   ========================================================= */
+
+#BlocksPannel.sidebar {
+  /* Kapsayıcı %100 yüksekliğe sahiptir, bu da #leftSide'ın yeni yüksekliğini alır. */
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important; 
+  left: auto !important;
+  z-index: 1 !important;
+  display: block !important;
+  overflow: hidden !important;
+  
+  /* Görsel Stil */
+  background: white;
+  border-radius: 18px;
+  border: 3px solid #4facfe;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* Blockly Başlık (45px) */
+#BlocksPannel::before {
+  content: "🧩 Blok Editörü";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45px;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  font-weight: 700;
+  font-size: 15px;
+  z-index: 10;
+}
+
+/* Blockly Alanı - Başlığın altından başlayıp, kalan alanı kaplar */
+#blocklyDiv {
+  position: absolute !important;
+  top: 45px; /* Başlık altından başla */
+  left: 0;
+  right: 0;
+  bottom: 0; /* Kapsayıcının (BlocksPannel'ın) alt kenarına yerleşir */
+  overflow: auto !important;
+}
+
+/* Blockly SVG Ölçeklendirme */
+.blocklySvg {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* =========================================================
+   3. SAĞ TARAF (OYUN ALANI)
+   ========================================================= */
+
+#divGameArea {
+  /* Kapsayıcı %100 yüksekliğe sahiptir, bu da #rightSide'ın yeni yüksekliğini alır. */
+  position: relative;
+  width: 100%;
+  height: 100%; 
+  
+  /* Görsel Stil */
+  
+  background-image: url("../images/bg7.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 18px;
+  border: 3px solid #f093fb;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  
+  /* Başlık için içerik boşluğu (40px) */
+  padding-top: 40px;
+  box-sizing: border-box;
+}
+
+/* Oyun Alanı Başlık (40px) */
+
+#divGameArea::before {
+  content: "🎮 Oyun Alanı";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(135deg, #f093fb, #f5576c);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  font-weight: 600;
+  font-size: 14px;
+  z-index: 10;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+

@@ -1,0 +1,10 @@
+E:\RKAPanel\KoditPanel\wwwroot\rkagame\images\world\world1.svg
+E:\RKAPanel\KoditPanel\wwwroot\rkagame\rkagame1.html
+E:\RKAPanel\KoditPanel\wwwroot\rkagame\rkagame2.html
+E:\RKAPanel\KoditPanel\wwwroot\rkagame\rkagame3.html
+E:\RKAPanel\KoditPanel\wwwroot\rkagame\rkagame4.html
+E:\RKAPanel\KoditPanel\wwwroot\rkagame\rkagame5.html
+E:\RKAPanel\KoditPanel\wwwroot\rkagame\rkagame6.html
+E:\RKAPanel\KoditPanel\wwwroot\rkagame\rkagame7.html
+E:\RKAPanel\KoditPanel\wwwroot\rkagame\rkagame8.html
+E:\RKAPanel\KoditPanel\wwwroot\rkagame\rkagame9.html

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RKA Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/x-icon" href="images/jrico.png">
+
+  <meta charset="utf-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="css/dropdown.css">
+  <link rel="stylesheet" href="css/popup-style.css">
+  <link rel="stylesheet" href="css/popup-map.css">
+  <link rel="stylesheet" href="css/lang.css">
+  <link rel="stylesheet" href="css/spinner.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/sidepanel.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+
+  <script src="blockly_uncompressed_horizontal.js"></script>
+  <script src="msg/messages.js"></script>
+
+  <script src="generators/javascript.js"></script>
+  <script src="generators/javascript/pinoo.js"></script>
+  <script src="generators/javascript/event.js"></script>
+  <script src="generators/javascript/control.js"></script>
+  <script src="generators/javascript/colour.js"></script>
+
+  <script src="generators/arduino.js"></script>
+  <script src="generators/arduino/pinoo.js"></script>
+  <script src="generators/arduino/event.js"></script>
+  <script src="generators/arduino/control.js"></script>
+  <script src="generators/arduino/colour.js"></script>
+
+  <script src="blocks_common/math.js"></script>
+  <script src="blocks_common/text.js"></script>
+  <script src="blocks_common/colour.js"></script>
+
+  <script src="blocks_horizontal/control.js"></script>
+  <script src="blocks_horizontal/event.js"></script>
+  <script src="blocks_horizontal/pinoo.js"></script>
+
+  <script src="blocks_horizontal/default_toolbox.js"></script>
+
+  <script src="js/tr.js"></script>
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/acorn_interpreter.js"></script>
+  <script src="js/assetmanager.js"></script>
+
+  <script src="js/messages.js"></script>
+  <script src="js/codeedit.js"></script>
+  <script src="js/workspaces1.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+  <script src="../../js/pinoo-uploader.js"></script>
+  <script src="../../js/fileoperations.js"></script>
+  <script src="../../js/uploadfirmware.js"></script>
+
+  <script src="https://kit.fontawesome.com/bc06efbf60.js" crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+	  var lang = String(window.location).split("?")[0];
+
+	  if(lang != "en")
+	  	lang = "tr";
+	  
+	  document.write('<script src="../../js/lang/' + lang + '.js"><\/script>\n');
+	  var pageName = "rkagame6";
+	</script>
+
+</head>
+
+<body onload="onLoadPage()">
+	
+<!--CSS Spinner-->
+<div class="spinner-wrapper" id="preloader">
+  <div class="spinner">
+      <span class="loader"></span>
+  </div>
+</div>
+
+<div class="bg">
+<div>
+    <audio autoplay hidden loop id="bgsound">
+     	<!--<source src="media/nightwinds.mp3" type="audio/mp3">-->
+    </audio>
+</div>
+
+<div class="container-fluid">
+
+  <img class="savingButton" id="btSaving"/>
+  <div class="w3-light-blue progressBar" id="progressBarDiv">
+    <div class="w3-container w3-green w3-center" style="width:1%; height:20px" id="progressBar">0%</div>
+  </div>
+      
+	<div class="row text-center" style="background-color:#799EFF; color:white; font-weight: bold;" id="pageHeader">
+		<div class="col-sm-2"> 
+			<div class="img">
+				<a href="#"><img src="images/logo3.png" style="height: 3vw;" alt="Logo" onclick="redirectToPage('../../index.html')"></a></div>
+		</div>
+
+	 	<div class="col-sm-2" style="font-size: xx-large; text-align: right; padding-top:5px;" id="">
+	 		Temel Hareketler
+	 	</div>
+	 	
+	 	<div class="col-sm-5" style="text-align: left;">
+	 		<div class="pagination" style="font-size: large;">
+			  <a href="#" onClick="GotoPage('01');" id="pgn01"><img id="img01" src="images/levelnumbers/level1.png" style="width: 2vw"></a>
+			  <a href="#" onClick="GotoPage('02');" id="pgn02"><img id="img02" src="images/levelnumbers/level2.png" style="width: 2vw"></a>
+			  <a href="#" onClick="GotoPage('03');" id="pgn03"><img id="img03" src="images/levelnumbers/level3.png" style="width: 2vw"></a>
+			  <a href="#" onClick="GotoPage('04');" id="pgn04"><img id="img04" src="images/levelnumbers/level4.png" style="width: 2vw"></a>
+			  <a href="#" onClick="GotoPage('05');" id="pgn05"><img id="img05" src="images/levelnumbers/level5.png" style="width: 2vw"></a>
+			  <a href="#" onClick="GotoPage('06');" id="pgn06"><img id="img06" src="images/levelnumbers/level6.png" style="width: 2vw"></a>
+			  <a href="#" onClick="GotoPage('07');" id="pgn07"><img id="img07" src="images/levelnumbers/level7.png" style="width: 2vw"></a>
+			  <a href="#" onClick="GotoPage('08');" id="pgn08"><img id="img08" src="images/levelnumbers/level8.png" style="width: 2vw"></a>
+			  <a href="#" onClick="GotoPage('09');" id="pgn09"><img id="img09" src="images/levelnumbers/level9.png" style="width: 2vw"></a>
+			  <a href="#" onClick="GotoPage('10');" id="pgn10"><img id="img10" src="images/levelnumbers/level10.png" style="width: 2vw"></a>
+			</div>
+			
+	 	</div>
+
+	</div>
+	<!----------------------->
+	<div class="row">	
+		<div class="col-sm-6" id="leftSide">
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="BlocksPannel" class="sidebar">
+						<div id="blocklyDiv"></div>
+					</div>
+			  </div>
+			</div>
+		</div>
+		<div class="col-sm-6" id="rightSide">
+			<!--<div class="row">
+				<div class="col-sm-12" id="divGameTop" >
+					&nbsp;
+				</div>
+			</div>-->
+			<div class="row">
+				<div class="col-sm-12" id="divGameArea">
+				
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!----------------------->
+<img class="runButton" onclick="btRunCodeClick();" id="btRunCode"/>
+
+<!-- Success Modal -->
+<div id="messageSuccessModal" class="modalbg">
+	<div class="dialog">
+		<div style="height: 30%; background-color: white; align-items:center; text-align:center;" id="infoHeader">
+      	<img src="images/info/header.png" class="img-fluid" style="width: 15vw; height: auto;" />
+    </div>
+
+    <div class="outer-div" style="background-color: #9b9bddff; height: 75%;">
+		    <div class="row">
+					<div class="col-sm-12">
+							<div class="outer-div">
+    					  <div class="middle-div"> 
+						    	  <div class="row">
+					              <div class="col-sm-12">
+					                <div class="popUpHeader" id = "txtSuccessHeader">BAŞARDIN</div>
+					              </div>
+					          </div>
+					          <div class="row">
+					              <div class="col-sm-12">
+					                <div class="popUpHeader" id = "txtSuccessMessage">Sonraki Aşamaya Geçebilirsin</div>
+					              </div>
+					          </div>
+						    </div>
+						  </div>
+					</div>
+				</div>
+    </div>
+
+    <div style="background-image: url('images/info/infofooter.png'); background-size: cover; height: 20%; width: 100%; align-items: center; text-align: right;">
+	     <div class="row">
+			<div class="col-sm-12" style="text-align:center;">
+		        <a href="#" >
+		        	<button type="button" class="btn modalButton" id="btSuccessRepeat"><img src="images/info/repeat.png"></button>
+		    	</a>
+		        	<button type="button" class="btn modalButton" id="btnSuccessNext"><img src="images/info/next.png"></button>
+			</div>
+		</div>
+    </div>
+	</div>
+</div>
+<!-- -->
+
+<!-- Error Modal -->
+<div id="messageErrorModal" class="modalbg">
+	<div class="dialog">
+		<div style="height: 30%; background-color: white; align-items:center; text-align:center;" id="infoHeader">
+      	<img src="images/info/header.png" class="img-fluid" style="width: 15vw; height: auto;" />
+    </div>
+
+    <div class="outer-div" style="background-color: #9b9bddff; height: 75%;">
+		    <div class="row">
+					<div class="col-sm-12">
+							<div class="outer-div">
+    					  <div class="middle-div"> 
+						    	<div class="row">
+								  	<div class="col-sm-12">
+								       <div class="popUpHeader" id="txtErrorHeader">Bu kod hatalı olabilir.<br>Tekrar Denemelisin</div>
+								   	</div>
+						 			</div>
+						 			<div class="row">
+							  		<div class="col-sm-12">
+							        <div class="popUpHeader" id="txtErrorMessage"></div>
+							  		</div>
+									</div>
+						    </div>
+						  </div>
+					</div>
+				</div>
+    </div>
+
+    <div style="background-image: url('images/info/infofooter.png'); background-size: cover; height: 20%; width: 100%; align-items: center; text-align: right;">
+	     <div class="row">
+					<div class="col-sm-12" style="text-align:center;">
+						  <a href="#">
+					        <button type="button" class="btn modalButton" id="btnErrorOkey"><img src="images/info/repeat.png"></button>
+					    </a>
+					</div>
+			</div>
+    </div>
+	</div>
+</div>
+<!-- -->
+
+<!--Information Modal-->
+<div id="messageInfoModal" class="modalbg">
+	<div class="dialog">
+		<div style="height: 30%; background-color: white; align-items:center; text-align:center;" id="infoHeader">
+			<img src="images/info/header.png" class="img-fluid" style="width: 15vw; height: auto;" />
+	  	</div>
+  
+	  	<div class="outer-div" style="background-color: #9b9bddff; height: 75%;">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="outer-div">
+						<div class="middle-div"> 
+							<div id="messageInfoModalBody" class="infoBody"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+	  	</div>
+  
+	  	<div style="background-image: url('images/info/infofooter.png'); background-size: cover; height: 20%; width: 100%; align-items: center; text-align: right;">
+		    <div class="row">
+				<div class="col-sm-12" style="text-align:center;">
+					<a href="#">
+						<button type="button" class="btn modalButton" id="btnInfoOkey" style="color: #FFC436;"><img src="images/info/ok.png"></button>
+					</a>
+				</div>
+			</div>
+	  	</div>
+	</div>
+</div>
+
+<d iv class="modal fade" tabindex="-1" role="dialog" id="modalDialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDialogTitle">RKA Game</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="dialogText">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="modalDialogClose">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modalConfirmConnection">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" id="confirmDialogText">
+        Do you want to close the connection?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="confirmConnectionClose">Close</button>
+        <button type="button" class="btn btn-primary" onclick="disConnectSerial()" id="confirmConnectionOkey">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<xml xmlns="https://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+	<block type="start"></block>
+    <block type="control_repeat"> 
+       <value name="TIMES"> 
+           <shadow type="math_whole_number"> 
+               <field name="NUM">4</field> 
+           </shadow> 
+       </value> 
+    </block> 
+
+    <block type="control_wait"> 
+       <value name="DURATION"> 
+           <shadow type="math_positive_number"> 
+               <field name="NUM">1</field> 
+           </shadow> 
+       </value> 
+    </block> 
+
+    <block type="walkForward"> 
+       <value name="DURATION">
+           <shadow type="math_positive_number"> 
+               <field name="NUM">1</field> 
+           </shadow> 
+       </value> 
+    </block> 
+    
+    <block type="turnLeft"> 
+       <value name="DURATION"> 
+           <shadow type="math_positive_number"> 
+               <field name="NUM">1</field> 
+           </shadow> 
+       </value> 
+    </block> 
+
+    <block type="turnRight"> 
+       <value name="DURATION"> 
+           <shadow type="math_positive_number"> 
+               <field name="NUM">1</field> 
+           </shadow> 
+       </value> 
+    </block> 
+</xml>
+
+<xml xmlns="https://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none"></xml>
+
+<script src="js/game.js"></script>
+<script src="js/gamefunctions.js"></script>
+<script src="../../js/script.js"></script>
+
+</div>
+</body>
+</html>

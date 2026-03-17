@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kodlama Dersleri</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/popup-style.css">
+  <link rel="stylesheet" href="css/popup-map.css">
+  <link rel="stylesheet" href="css/lang.css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="css/sidepanel.css?v=1.13">
+  <link rel="stylesheet" href="css/style.css?v=1.13">
+
+  <script type="text/javascript">
+  	const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    lang = window.location.href.split('?')[2];
+    
+    if(lang == undefined)
+      lang = "tr";
+  </script>
+
+  <script src="js/blockly/blockly_uncompressed.js"></script>
+  <script src="js/blockly/generators/javascript.js"></script>
+  <script src="js/blockly/generators/javascript/logic.js"></script>
+  <script src="js/blockly/generators/javascript/loops.js"></script>
+  <script src="js/blockly/generators/javascript/math.js"></script>
+  <script src="js/blockly/generators/javascript/text.js"></script>
+  <script src="js/blockly/generators/javascript/lists.js"></script>
+  <script src="js/blockly/generators/javascript/colour.js"></script>
+  <script src="js/blockly/generators/javascript/variables.js"></script>
+  <script src="js/blockly/generators/javascript/variables_dynamic.js"></script>
+  <script src="js/blockly/generators/javascript/procedures.js"></script>
+  <script src="js/blockly/msg/messages.js"></script>
+  <script src="js/blockly/blocks/extensions.js"></script>
+  <script src="js/blockly/blocks/logic.js"></script>
+  <script src="js/blockly/blocks/loops.js"></script>
+  <script src="js/blockly/blocks/math.js"></script>
+  <script src="js/blockly/blocks/text.js"></script>
+  <script src="js/blockly/blocks/lists.js"></script>
+  <script src="js/blockly/blocks/colour.js"></script>
+  <script src="js/blockly/blocks/variables.js"></script>
+  <script src="js/blockly/blocks/variables_dynamic.js"></script>
+  <script src="js/blockly/blocks/procedures.js"></script>
+  <script src="js/blockly/blocks/pxt_blockly_functions.js"></script>
+  <script src="js/blockly/blocks/test_blocks.js"></script>
+  <script src="js/blockly/blocks/pxt_test_blocks.js"></script>
+
+  <script src="js/tr.js"></script>
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/acorn_interpreter.js"></script>
+  <script src="js/assetmanager.js"></script>
+  <script src="js/fileoperations.js"></script>
+  <script src="js/codeedit.js"></script>
+
+  <script src="js/workspaces1.js"></script>
+  <script src="js/blockly/blocks/blockscripts.js"></script>
+  <script src="js/blockly/generators/javascript/blockscripts.js"></script>
+
+  <script src="https://kit.fontawesome.com/bc06efbf60.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body onload="onLoadPage()">
+	
+<!--CSS Spinner-->
+	<div class="spinner-wrapper">
+		<div class="spinner">
+			  <div class="rect1"></div>
+			  <div class="rect2"></div>
+			  <div class="rect3"></div>
+			  <div class="rect4"></div>
+			  <div class="rect5"></div>
+		</div>
+	</div>
+<div class="bg">
+<div>
+    <audio autoplay hidden loop id="bgsound">
+     	<!--<source src="media/nightwinds.mp3" type="audio/mp3">-->
+    </audio>
+</div>
+
+<div class="container-fluid">
+
+	<div class="row text-center" id="pageHeader">
+		<div class="col-sm-2 logo-section"> 
+			<div class="img"><a href="#"><img src="images/logo3.png" alt="Logo"></a></div>
+		</div>
+
+	 	<div class="col-sm-4 header-section">
+          <div class="level-navigation-header">
+            <button class="nav-arrow" id="prevBtn" onclick="scrollLevels(-1)">‹</button>
+            <div id="levelButtonsContainer">
+              <!-- Level butonları buraya gelecek -->
+            </div>
+            <button class="nav-arrow" id="nextBtn" onclick="scrollLevels(1)">›</button>
+          </div>
+    </div>
+
+      <img class="runButton" onclick="btRunCodeClick();" id="btRunCode"/>
+      
+	 	<div class="col-sm-4 header-section">
+		 	<div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+
+         <button class="control-btn-header" onclick="showSolution()" title="Çözüm">
+          <i class="fa-solid fa-circle-check"></i> <span id="btSolution">Çözüm</span>
+        </button>
+ 
+          <button class="control-btn-header" onclick="SaveProject()" title="Kaydet">
+            <i class="fa-solid fa-download"></i> <span id="btSave">Kaydet</span>
+          </button>
+
+          <button class="control-btn-header" onclick="OpenProject(dispFile)" title="Yükle">
+            <i class="fa-solid fa-upload"></i> <span id="btLoad">Yükle</span>
+          </button>
+
+        </div>
+	 	</div>
+    
+        <div class="col-sm-2 header-section">
+          
+        <div>
+						<ul class="list-unstyled list-inline">
+						  <li class="ct-language"> <img src="images/flags/tr.png" alt="Turkish" id = "comboImg">
+							<ul class="list-unstyled ct-language__dropdown">
+							  <li><a href="#" class="lang-tr lang-select" data-lang="tr"><img src="images/flags/tr.png" alt="Turkish"></a></li>
+							  <li><a href="#" class="lang-en lang-select" data-lang="en"><img src="images/flags/en.png" alt="English"></a></li>
+							</ul>
+						  </li>
+						</ul>
+				</div>
+        </div>
+	</div>
+
+	<div class="row content-row">	
+		<div class="col-sm-8" id="leftSide">
+			<div class="row" style="height: 100%; margin: 0;">
+				<div class="col-sm-12" style="height: 100%; padding: 0;">
+					<div id="BlocksPannel" class="sidebar">
+						<div id="blocklyDiv"></div>
+					</div>
+			  </div>
+			</div>
+		</div>
+		<div class="col-sm-4" id="rightSide">
+			<div class="row" style="height: 100%; margin: 0; ">
+				<!--<div class="col-sm-12" id="divGameTop" ></div>-->
+          <div class="col-sm-12" style="height: 90%;">
+            <div id="divGameArea">
+            </div>
+          </div>
+			</div>
+		</div>
+	</div>
+  
+</div>
+
+<!-- Info Panel -->
+<div class="info-panel-bottom">
+  <div class="info-title">Soru</div>
+  <div class="info-content">
+    <div id="messageInfoModalBody" class="infoBody"></div>
+  </div>
+</div>
+
+<!-- Çözüm Modal -->
+<div id="solutionModal" class="solution-modal">
+  <div class="solution-modal-content">
+    <div class="solution-modal-header">
+      <h2><i class="fa-solid fa-circle-check"></i> <span id="solutionLevelNumber"></span></h2>
+      <button class="solution-close" onclick="closeSolution()">&times;</button>
+    </div>
+    <div class="solution-modal-body">
+      <div id="solutionContent">
+        <p class="solution-loading">Çözüm yükleniyor</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<xml xmlns="https://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+  
+  <block type="start"></block>
+  <block type="bottom"></block>
+
+
+  <block type="walk_forward">
+    <value name="Value">
+      <shadow type="math_number">
+        <field name="NUM">1</field>
+      </shadow>
+    </value>
+  </block>
+
+  <block type="turn_left">
+    <value name="Value">
+      <shadow type="math_number">
+        <field name="NUM">90</field>
+      </shadow>
+    </value>
+  </block>
+
+  <block type="turn_right">
+    <value name="Value">
+      <shadow type="math_number">
+        <field name="NUM">90</field>
+      </shadow>
+    </value>
+  </block>
+
+
+  <block type="whileKodit">
+    <value name="Value">
+      <shadow type="math_number">
+        <field name="NUM">1</field>
+      </shadow>
+    </value>
+  </block>
+
+  <block type="untilKodit">
+    <value name="Value">
+      <shadow type="text">
+        <field name="TXT"></field>
+      </shadow>
+    </value>
+  </block>
+
+  <block type="whileEndKodit"></block>
+
+  <block type="funcKodit">
+    <value name="Value">
+      <shadow type="text">
+        <field name="TXT"></field>
+      </shadow>
+    </value>
+  </block>
+
+  <block type="funcEndKodit"></block>
+
+  <block type="callFuncKodit">
+    <value name="Value">
+      <shadow type="text">
+        <field name="TXT"></field>
+      </shadow>
+    </value>
+  </block>
+
+
+  <block type="ifKodit">
+    <value name="Value">
+      <shadow type="text">
+        <field name="TXT"></field>
+      </shadow>
+    </value>
+  </block>
+
+  <block type="elseKodit"></block>
+
+  <block type="ifEndKodit"></block>
+
+  <block type="say_kodit">
+    <value name="Value">
+      <shadow type="text">
+        <field name="TXT"></field>
+      </shadow>
+    </value>
+  </block>
+
+  <block type="do_kodit">
+    <value name="Value">
+      <shadow type="text">
+        <field name="TXT"></field>
+      </shadow>
+    </value>
+  </block>
+
+  <block type="do_kodit2">
+    <value name="Value">
+      <shadow type="text">
+        <field name="TXT"></field>
+      </shadow>
+    </value>
+  </block>
+
+</xml>
+
+<xml xmlns="https://www.w3.org/1999/xhtml" id="workspaceBlocks" style="display:none"></xml>
+
+<script src="js/appearange.js"></script>
+<script src="js/gamefunctions.js"></script>
+
+<script type="text/javascript">
+	var code = Blockly.JavaScript.workspaceToCode(workspace);
+	$("#codeDiv").html(ShowCode(code));
+</script>
+
+</div>
+</body>
+</html>

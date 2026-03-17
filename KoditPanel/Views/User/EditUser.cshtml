@@ -1,0 +1,72 @@
+﻿@model EntityLayer.Concrete.User
+@{
+    ViewData["Title"] = "Kullanıcı Düzenle";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Sidebar -->
+        <nav class="col-md-2 d-none d-md-block bg-dark text-white sidebar vh-100">
+            <div class="sidebar-sticky pt-3">
+                <h4 class="text-center mb-4">Admin Panel</h4>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2">
+                        <a class="btn btn-outline-light w-100" href="/User/Index">Kullanıcı Logları</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="btn btn-outline-light w-100" href="/User/AddUser">Kullanıcı Ekle</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="btn btn-outline-light w-100" href="/User/Users">Kullanıcı Bilgileri</a>
+                    </li>
+                    <li class="nav-item">
+                        <form asp-controller="Login" asp-action="Logout" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm rounded-pill px-3 py-1 ms-2">
+                                <i class="bi bi-box-arrow-right me-1"></i> Çıkış
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main role="main" class="col-md-10 ml-sm-auto px-4 py-4">
+            <h2>Kullanıcı Düzenle</h2>
+
+            <form method="post" class="mt-3">
+                <input type="hidden" name="Id" value="@Model.Id" />
+
+                <div class="mb-3">
+                    <label>Ad Soyad:</label>
+                    <input type="text" name="NameSurname" value="@Model.NameSurname" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>Kullanıcı Adı:</label>
+                    <input type="text" name="UserName" value="@Model.UserName" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>Şifre:</label>
+                    <input type="password" name="Password" value="@Model.Password" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label>Şehir:</label>
+                    <input type="text" name="City" value="@Model" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label>Okul:</label>
+                    <input type="text" name="School" value="@Model" class="form-control" />
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-2">Güncelle</button>
+            </form>
+        </main>
+    </div>
+</div>
